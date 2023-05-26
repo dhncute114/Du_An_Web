@@ -1,0 +1,33 @@
+<%- include('../inc/navQL') %>
+    <div class="container">
+        <h2 class="d-flex justify-content-center p-2">Thêm sản phẩm mới</h2>
+        <h6 class="d-flex justify-content-center text-danger">
+            <%= msg %>
+                </h3>
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="product-name">Username:</label>
+                        <input type="text" class="form-control m-2" name="usernameNV" required placeholder="Nhập username" value="<%= objsp.usernameNV %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="product-name">Password:</label>
+                        <input type="text" class="form-control m-2" name="passNV" required placeholder="Nhập password" value="<%= objsp.passNV %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="product-description">Địa chỉ:</label>
+                        <textarea class="form-control m-2" name="diachi" rows="3" required
+                            placeholder="Nhập địa chỉ nhân viên" ><%= objsp.diachi %></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-name">Số điẹn thoại:</label>
+                        <input type="text" class="form-control m-2" name="sdt" required
+                            placeholder="Nhập số điện thoại" value="<%= objsp.sdt %>">
+                    </div>
+                    <div lass="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control m-2" name="email" required
+                            placeholder="Nhập địa chỉ email" value="<%= objsp.email %>">
+                    </div>
+                    <button type="submit" class="btn btn-danger m-2">Sửa tài khoản</button>
+                </form>
+    </div>

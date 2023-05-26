@@ -1,0 +1,77 @@
+<%- include('../inc/navQL')%>
+
+    <div class="container">
+        <h2 class="d-flex justify-content-center p-2">DANH SÁCH TÀI KHOẢN NHÂN VIÊN</h2>
+
+        <div id="noidung" class="container position-relative">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item active">
+                                <a class="btn btn-danger" href="/quanly/taotknv">Tạo tài khoản nhân viên</a>
+                            </li>
+                        </ul>
+                        <form class="d-flex" method="GET" action="" id="search-form">
+                            <input class="form-control me-2" type="search" placeholder="Tìm kiếm theo username"
+                                aria-label="Search" name="usernameNV">
+                            <button class="btn btn-warning" type="submit">Tìm kiếm</button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>Tên đăng nhập</th>
+                        <th>Số điện thoại</th>
+                        <th>Tác vụ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% listtk.forEach((row)=> { %>
+                        <tr>
+                            <td>
+                                <h4><a href="taikhoan/chitietnv/<%= row.id %>"><%= row.usernameNV %></a></h4>
+                            </td>
+                            <td>
+                                <%= row.sdt %>
+                            </td>
+                            <td>
+                                <a class="btn btn-primary" href="taikhoan/suatknv/<%= row.id %>">Sửa</a>
+                                <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">Xoá</a>
+
+                                <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog"
+                                    aria-labelledby="delete-modal-label" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="delete-modal-label">Xác nhận xoá tài khoản</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Bạn có chắc chắn muốn xoá tài khoản này không?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a type="button" class="btn btn-danger" id="delete-confirm"
+                                                    href="/taikhoan/xoatk/<%= row.id %>">Xoá</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+        </div>
+
+
+        <%- include('../inc/bottom') %>
