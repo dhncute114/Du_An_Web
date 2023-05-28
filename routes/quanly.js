@@ -14,7 +14,7 @@ router.post('/themsp',uploader.single("image"), quanlyRoute.themSanpham);
 router.delete('/xoasp/:idsp', quanlyRoute.xoaSanpham);
 router.get('/xoasp/:idsp', quanlyRoute.xoaSanpham);
 
-router.post('/suasp/:idsp', quanlyRoute.suaSanpham);
+router.post('/suasp/:idsp',uploader.single("image"), quanlyRoute.suaSanpham);
 router.get('/suasp/:idsp', quanlyRoute.suaSanpham);
 
 router.get('/taikhoan', quanlyRoute.dsTaikhoanNV);
@@ -29,8 +29,13 @@ router.get('/taikhoan/xoatk/:idnv', quanlyRoute.xoaTaikhoannv);
 router.post('/taikhoan/suatknv/:idnv', quanlyRoute.suaTaikhoannv);
 router.get('/taikhoan/suatknv/:idnv', quanlyRoute.suaTaikhoannv);
 
-router.post('/addtheloai',quanlyRoute.addtheloai);
-router.get('/addtheloai',quanlyRoute.addtheloai);
+router.get('/addtheloai', quanlyRoute.themTheloai);
+router.post('/addtheloai', quanlyRoute.themTheloai);
+router.post('/addtheloai/xoatheloai', quanlyRoute.xoaTheloai);
+
+
+
+
 
 
 module.exports = router;

@@ -55,7 +55,7 @@ exports.themSanpham = async (req, res, next) => {
             objSP.id_theloai = req.body.theloai;
             objSP.image = url_file;
             objSP.mota = req.body.mota;
-            objSP.soluong = req.body.soluong;            
+            objSP.soluong = req.body.soluong;
             objSP.gia = req.body.gia;
 
             try {
@@ -74,26 +74,44 @@ exports.suaSanpham = async (req, res, next) => {
     var listtl = await mydb.tlmd.find();
 
     let idsp = req.params.idsp;
-    let objsp = await mydb.spmd.findById(idsp);
+    let objSP = await mydb.spmd.findById(idsp);
+
+    var fs = require('fs');
 
     if (req.method == 'POST') {
-        objsp.tensp = req.body.tensp;
-        objsp.id_theloai = req.body.theloai;
-        objsp.image = req.body.image;
-        objsp.soluong = req.body.soluong;
-        objsp.mota = req.body.mota;
-        objsp.gia = req.body.gia;
+        if (req.body.tensp == "") {
+            msg = 'Vui lòng nhập tên sản phẩm'
+        } else if (req.body.mota == "") {
+            msg = 'Vui lòng nhập mô tả sản phẩm'
+        } else if (req.body.gia == "") {
+            msg = 'Vui lòng nhập giá sản phẩm'
+        } else if (req.body.image == "") {
+            msg = 'Vui lòng thêm ảnh sản phẩm'
+        } else if (req.body.soluong == "") {
+            msg = 'Vui lòng thêm số lượng sản phẩm'
+        } else {
+            let url_file = '/uploads/' + req.file.originalname;
 
-        try {
-            await mydb.spModel.findByIdAndUpdate({ _id: idsp }, objsp)
-            msg = 'sua thanh cong';
-        } catch (error) {
-            msg = 'loi' + error.message;
-            console.log(error);
+            objSP.tensp = req.body.tensp;
+            objSP.id_theloai = req.body.theloai;
+            objSP.image = url_file;
+            objSP.mota = req.body.mota;
+            objSP.soluong = req.body.soluong;
+            objSP.gia = req.body.gia;
+
+            try {
+                fs.renameSync(req.file.path, "./public/uploads/" + req.file.originalname);
+                await mydb.spmd.findByIdAndUpdate({ _id: idsp }, objSP)
+                msg = 'sua thanh cong';
+                res.redirect('/quanly')
+            } catch (error) {
+                msg = 'loi' + error.message;
+                console.log(error);
+            }
         }
     }
 
-    res.render('quanly/suasanpham', { listtl: listtl, objsp: objsp });
+    res.render('quanly/suasanpham', { listtl: listtl, objsp: objSP });
 }
 
 
@@ -115,7 +133,7 @@ exports.dsTaikhoanNV = async (req, res, next) => {
     if (typeof (req.query.usernameNV) !== 'undefined') {
         filter.usernameNV = new RegExp(req.query.usernameNV, "i");
     }
-    var list = await mydbuser.nhanvienmd.find(filter).sort({usernameNV: 1});
+    var list = await mydbuser.nhanvienmd.find(filter).sort({ usernameNV: 1 });
     res.render('quanly/danhsachtknv', { listtk: list });
 }
 
@@ -173,10 +191,10 @@ exports.suaTaikhoannv = async (req, res, next) => {
 
     if (req.method == 'POST') {
         objsp.usernameNV = req.body.usernameNV,
-        objsp.passNV = req.body.passNV,
-        objsp.email = req.body.email,
-        objsp.sdt = req.body.sdt,
-        objsp.diachi = req.body.diachi
+            objsp.passNV = req.body.passNV,
+            objsp.email = req.body.email,
+            objsp.sdt = req.body.sdt,
+            objsp.diachi = req.body.diachi
 
         try {
             await mydbuser.nhanvienmd.findByIdAndUpdate({ _id: id }, objsp)
@@ -191,8 +209,10 @@ exports.suaTaikhoannv = async (req, res, next) => {
     res.render('quanly/suatknv', { objsp: objsp, msg: msg });
 }
 
-exports.addtheloai = async (req, res, next) => {
+exports.themTheloai = async (req, res, next) => {
     let msg = ''; // dùng để truyền ra view
+
+    let listl = await mydb.tlmd.find();
 
     if (req.method == 'POST') {
         let objsp = new mydb.tlmd;
@@ -202,12 +222,25 @@ exports.addtheloai = async (req, res, next) => {
             let new_tl = await objsp.save();
             console.log(new_tl);
             msg = 'Đã thêm thành công';
-            res.redirect('/quanly')
+            res.redirect('/quanly/addtheloai')
         } catch (error) {
             msg = 'Lỗi' + error.message;
             console.log(error);
         }
     }
-
-    res.render('quanly/themtheloai',{msg: msg})
+    res.render('quanly/themtheloai', { listtl: listl });
 };
+
+exports.xoaTheloai = async (req, res, next) => {
+    const selectedIds = req.body.selectedIds;
+
+    try {
+        // Xoá các thể loại dựa trên danh sách các ID đã chọn
+        await mydb.tlmd.deleteMany({ _id: { $in: selectedIds } });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal server error');
+    }
+
+    res.redirect('/quanly/addtheloai');
+}
