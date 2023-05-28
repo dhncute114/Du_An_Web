@@ -16,28 +16,25 @@
                             <a class="nav-link btn btn-outline-info" href="/quanly/themsp">Thêm sản
                                 phẩm</a>
                         </li>
+                        <li class="nav-item m-1">
+                            <a class="nav-link btn btn-outline-info" href="/quanly/addtheloai">Thêm thể loại
+                                </a>
+                        </li>
                         <li class="nav-item dropdown m-1">
                             <a class="nav-link dropdown-toggle btn btn-outline-danger" href="#" id="navbarDropdown"
                                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Chọn thể loại
+                                Lọc thể loại
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <% listtl.forEach((row)=> { %>
-                                    <li><a class="dropdown-item" href="?id_theloai=<%= row._id %>">
-                                            <%= row.theloai %>
-                                        </a></li>
-                                    <% }); %>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">                                 
                                         <li><a class="dropdown-item" href="/quanly">Tất cả thể loại</a></li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
-                                        <li>
-                                            <a data-bs-toggle="modal" data-bs-target="#addTheLoaiModal" href=""
-                                                class="dropdown-item">Thêm thể loại</a>
-                                        </li>
+                                        <% listtl.forEach((row)=> { %>
+                                            <li><a class="dropdown-item" href="?id_theloai=<%= row._id %>">
+                                                    <%= row.theloai %>
+                                                </a></li>
+                                            <% }); %>
                             </ul>
                         </li>
                     </ul>

@@ -190,3 +190,24 @@ exports.suaTaikhoannv = async (req, res, next) => {
 
     res.render('quanly/suatknv', { objsp: objsp, msg: msg });
 }
+
+exports.addtheloai = async (req, res, next) => {
+    let msg = ''; // dùng để truyền ra view
+
+    if (req.method == 'POST') {
+        let objsp = new mydb.tlmd;
+        objsp.theloai = req.body.theloai;
+
+        try {
+            let new_tl = await objsp.save();
+            console.log(new_tl);
+            msg = 'Đã thêm thành công';
+            res.redirect('/quanly')
+        } catch (error) {
+            msg = 'Lỗi' + error.message;
+            console.log(error);
+        }
+    }
+
+    res.render('quanly/themtheloai',{msg: msg})
+};

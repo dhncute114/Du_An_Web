@@ -29,6 +29,8 @@ router.get('/taikhoan/xoatk/:idnv', quanlyRoute.xoaTaikhoannv);
 router.post('/taikhoan/suatknv/:idnv', quanlyRoute.suaTaikhoannv);
 router.get('/taikhoan/suatknv/:idnv', quanlyRoute.suaTaikhoannv);
 
+router.post('/addtheloai',quanlyRoute.addtheloai);
+router.get('/addtheloai',quanlyRoute.addtheloai);
 
 
 module.exports = router;
