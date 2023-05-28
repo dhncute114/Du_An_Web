@@ -38,34 +38,46 @@
                     <% listtk.forEach((row)=> { %>
                         <tr>
                             <td>
-                                <h4><a href="taikhoan/chitietnv/<%= row.id %>"><%= row.usernameNV %></a></h4>
+                                <h4><a href="taikhoan/chitietnv/<%= row.id %>">
+                                        <%= row.usernameNV %>
+                                    </a></h4>
                             </td>
                             <td>
                                 <%= row.sdt %>
                             </td>
                             <td>
                                 <a class="btn btn-primary" href="taikhoan/suatknv/<%= row.id %>">Sửa</a>
-                                <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">Xoá</a>
+
+                                <a class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#delete-modal" onclick="setDeleteURL('<%= row.id %>')">Xoá</a>
 
                                 <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog"
                                     aria-labelledby="delete-modal-label" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="delete-modal-label">Xác nhận xoá tài khoản</h5>
+                                                <h5 class="modal-title" id="delete-modal-label">Xác nhận xoá sản phẩm
+                                                </h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                Bạn có chắc chắn muốn xoá tài khoản này không?
+                                                Bạn có chắc chắn muốn xoá sản phẩm này không?
                                             </div>
                                             <div class="modal-footer">
                                                 <a type="button" class="btn btn-danger" id="delete-confirm"
-                                                    href="/taikhoan/xoatk/<%= row.id %>">Xoá</a>
+                                                    href="#">Xoá</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+                                <script>
+                                    function setDeleteURL(id) {
+                                        var deleteURL = "/quanly/taikhoan/xoatk/" + id;
+                                        document.getElementById("delete-confirm").href = deleteURL;
+                                    }
+                                </script>
                             </td>
                         </tr>
                         <% }) %>

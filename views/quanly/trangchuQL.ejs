@@ -88,7 +88,7 @@
                             <a class="btn btn-outline-primary btn-sm" href="quanly/suasp/<%= row.id %>">Sửa</a>
 
                             <a class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#delete-modal">Xoá</a>
+                                data-bs-target="#delete-modal" onclick="setDeleteURL('<%= row.id %>')">Xoá</a>
 
                             <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog"
                                 aria-labelledby="delete-modal-label" aria-hidden="true">
@@ -103,12 +103,19 @@
                                             Bạn có chắc chắn muốn xoá sản phẩm này không?
                                         </div>
                                         <div class="modal-footer">
-                                            <a type="button" class="btn btn-danger" id="delete-confirm"
-                                                href="quanly/xoasp/<%= row.id %>">Xoá</a>
+                                            <a type="button" class="btn btn-danger" id="delete-confirm" href="#">Xoá</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                            <script>
+                                function setDeleteURL(id) {
+                                    var deleteURL = "quanly/xoasp/" + id;
+                                    document.getElementById("delete-confirm").href = deleteURL;
+                                }
+                            </script>
+
                         </td>
                     </tr>
                     <% }); %>
