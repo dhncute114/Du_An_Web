@@ -1,23 +1,23 @@
 <%-include('../inc/navQL') %>
     <div class="container mt-5">
-        <form action="/quanly/addtheloai" method="post">
+        <h2 class="d-flex justify-content-center">DANH SÁCH THỂ LOẠI</h2>
+        <hr style="border: none; height: 2px; background-color: black; font-weight: bold;">
+        <form action="/quanly/addtheloai" method="post" class="bg-light border-3">
             <div class="mb-3">
                 <label for="price" class="form-label">Nhập tên thể loại: </label>
                 <input type="text" class="form-control" name="theloai" required>
             </div>
             <button type="submit" class="btn btn-primary">Thêm thể loại</button>
         </form>
-        <hr>
+        <hr style="border: none; height: 2px; background-color: black; font-weight: bold;">
 
-        <h2 class="d-flex justify-content-center">DANH SÁCH THỂ LOẠI</h2>
-        <hr>
         <form action="/quanly/addtheloai/xoatheloai" method="POST">
             <div class="container">
-                <table class="table table-light">
+                <table class="table table-light" >
                     <thead>
                         <tr>
-                            <th>Thể loại</th>
-                            <th></th>
+                            <th class="col col-6 ">Thể loại</th>
+                            <th class="col col-6">Checkbox</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,7 +28,7 @@
                                 </td>
                                 <td>
                                     <div class="form-check">
-                                        <input class="form-check-input border-2" type="checkbox" name="selectedIds"
+                                        <input class="form-check-input border-3" type="checkbox" name="selectedIds"
                                             value="<%= row._id %>">
                                     </div>
                                 </td>
@@ -36,8 +36,8 @@
                             <% }); %>
                     </tbody>
                 </table>
-                <button type="submit" class="btn btn-danger" id="xoaBtn" disabled>Xoá thể loại</button>
             </div>
+            <button type="submit" class="btn btn-danger" id="xoaBtn" disabled>Xoá thể loại</button>
         </form>
     </div>
 
@@ -60,4 +60,4 @@
         }
     </script>
 
-<%-include('../inc/bottom') %>
+    <%-include('../inc/bottom') %>
