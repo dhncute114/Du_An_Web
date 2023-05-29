@@ -1,45 +1,17 @@
 <%-include('../inc/navQL') %>
-    <div class="container mt-5">
-        <form action="/quanly/addtheloai" method="post">
-            <div class="mb-3">
-                <label for="price" class="form-label">Nhập tên thể loại: </label>
-                <input type="text" class="form-control" name="theloai" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Thêm thể loại</button>
-        </form>
-        <hr>
-
-        <h2 class="d-flex justify-content-center">DANH SÁCH THỂ LOẠI</h2>
-        <hr>
-        <form action="/quanly/addtheloai/xoatheloai" method="POST">
-            <div class="container">
-                <table class="table table-light">
-                    <thead>
-                        <tr>
-                            <th>Thể loại</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% listtl.forEach((row)=> { %>
-                            <tr>
-                                <td>
-                                    <%= row.theloai %>
-                                </td>
-                                <td>
-                                    <div class="form-check">
-                                        <input class="form-check-input border-2" type="checkbox" name="selectedIds"
-                                            value="<%= row._id %>">
-                                    </div>
-                                </td>
-                            </tr>
-                            <% }); %>
-                    </tbody>
-                </table>
-                <button type="submit" class="btn btn-danger" id="xoaBtn" disabled>Xoá thể loại</button>
-            </div>
-        </form>
-    </div>
+<div class="container mt-5">
+    <h2>Thêm trạng thái</h2>
+    <hr>
+    <%= msg %>
+    <form action="" method="post">
+        <div class="mb-3">
+            <label for="price" class="form-label">Thể loại</label>
+            <input type="text" class="form-control" name="theloai">
+        </div>
+        <button type="submit" class="btn btn-primary">Thêm thể loại</button>
+    </form>
+    <hr>
+  </div>
 
     <script>
         // SCRIPT ĐỂ VÔ HIỆU HOÁ CHECK BOX NẾU NGƯỜI DÙNG K CHỌN
