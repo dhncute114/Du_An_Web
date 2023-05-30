@@ -61,10 +61,18 @@
                 <% listsp.forEach((row)=> { %>
                     <tr>
                         <td>
-                            <h4><a href="sanpham/chitietsp/<%= row.id %>"><%= row.tensp %></a></h4>
+                            <h4><a href="sanpham/chitietsp/<%= row.id %>">
+                                    <%= row.tensp %>
+                                </a></h4>
                         </td>
                         <td>
-                            <%= row.id_theloai.theloai %>
+                            <% if (row.id_theloai?.theloai==null) { %>
+                                <p>Đã bị xoá</p>
+                                <% } else { %>
+                                    <p>
+                                        <%= row.id_theloai.theloai %>
+                                    </p>
+                                    <% } %>
                         </td>
                         <td><img src=<%=row.image %>
                             width="200" height="150" alt="Ảnh đại diện">
