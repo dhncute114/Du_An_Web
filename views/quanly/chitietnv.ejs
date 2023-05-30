@@ -1,30 +1,34 @@
 <%- include('../inc/navQL') %>
 
-    <div class="container">
-        <h1 class="d-flex justify-content-center text-danger-emphasis p-1 ">
-            <%= nv.usernameNV %>
-                </h2>
-                <div class="row">
-                    <div class="">
-                        <div class="rounded-2 border border-secondary bg-white p-2 mb-2" style="white-space: nowrap;">
-                            <p style="font-weight: bold; display: inline;">Password: </p>
-                            <%= nv.passNV %>
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="d-flex justify-content-center text-danger-emphasis p-1 ">
+                    <%= nv.usernameNV %>
+                        </h2>
+                        <div class="row">
+                            <div class="">
+                                <div class="rounded-2 border border-secondary p-2 mb-2" style="white-space: nowrap;">
+                                    <p style="font-weight: bold; display: inline;">Password: </p>
+                                    <%= nv.passNV %>
+                                </div>
+                                <div class="rounded-2 border border-secondary p-2 mb-2" style="white-space: nowrap;">
+                                    <p style="font-weight: bold; display: inline;">Số điện thoại: </p>
+                                    <%= nv.sdt %>
+                                </div>
+                                <div class="rounded-2 border border-secondary  ps-2 pe-5 pt-5 pb-5 mb-2"
+                                    style="white-space: nowrap;">
+                                    <p style="font-weight: bold; display: inline;">Địa chỉ: </p>
+                                    <%= nv.diachi %>
+                                </div>
+                                <div class="rounded-2 border border-secondary  p-2 mb-2" style="white-space: nowrap;">
+                                    <p style="font-weight: bold; display: inline;">Email: </p>
+                                    <%= nv.email %>
+                                </div>
+                            </div>
                         </div>
-                        <div class="rounded-2 border border-secondary bg-white p-2 mb-2" style="white-space: nowrap;">
-                            <p style="font-weight: bold; display: inline;">Số điện thoại: </p>
-                            <%= nv.sdt %>
-                        </div>
-                        <div class="rounded-2 border border-secondary bg-white ps-2 pe-5 pt-5 pb-5 mb-2"
-                            style="white-space: nowrap;">
-                            <p style="font-weight: bold; display: inline;">Địa chỉ: </p>
-                            <%= nv.diachi %>
-                        </div>
-                        <div class="rounded-2 border border-secondary bg-white p-2 mb-2" style="white-space: nowrap;">
-                            <p style="font-weight: bold; display: inline;">Email: </p>
-                            <%= nv.email %>
-                        </div>
-                    </div>
-                </div>
+            </div>
+        </div>
     </div>
 
     <%- include('../inc/bottom') %>

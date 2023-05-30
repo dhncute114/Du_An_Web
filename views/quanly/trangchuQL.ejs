@@ -1,10 +1,9 @@
-<%- include('../inc/navQL', {tieu_de: 'Assigment-PH20149' }) %>
+<%- include('../inc/navQL') %>
 
+    <div class="container">
+        <h2 class="d-flex justify-content-center p-2 mb-5">DANH SÁCH SẢN PHẨM</h2>
 
-    <div id="noidung" class="container">
-        <h2 class="d-flex justify-content-center p-2">DANH SÁCH SẢN PHẨM</h2>
-
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3" style="border-radius: 10px;">
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,23 +17,23 @@
                         </li>
                         <li class="nav-item m-1">
                             <a class="nav-link btn btn-outline-success" href="/quanly/addtheloai">Danh sách thể loại
-                                </a>
+                            </a>
                         </li>
                         <li class="nav-item dropdown m-1">
                             <a class="nav-link dropdown-toggle btn btn-outline-danger" href="#" id="navbarDropdown"
                                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Lọc thể loại
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">                                 
-                                        <li><a class="dropdown-item" href="/quanly">Tất cả thể loại</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <% listtl.forEach((row)=> { %>
-                                            <li><a class="dropdown-item" href="?id_theloai=<%= row._id %>">
-                                                    <%= row.theloai %>
-                                                </a></li>
-                                            <% }); %>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/quanly">Tất cả thể loại</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <% listtl.forEach((row)=> { %>
+                                    <li><a class="dropdown-item" href="?id_theloai=<%= row._id %>">
+                                            <%= row.theloai %>
+                                        </a></li>
+                                    <% }); %>
                             </ul>
                         </li>
                     </ul>
@@ -48,80 +47,87 @@
             </div>
         </nav>
 
-
-        <table class="table table-hover table-light table-bordered">
-            <thead>
-                <tr>
-                    <th class="col col-2">Tên sản phẩm</th>
-                    <th class="col col-2">Loại sản phẩm</th>
-                    <th class="col col-2">Ảnh sản phẩm</th>
-                    <th class="col col-3">Mô tả</th>
-                    <th class="col col-1">Giá tiền</th>
-                    <th class="col col-2">Tác vụ</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% listsp.forEach((row)=> { %>
-                    <tr>
-                        <td>
-                            <a href="quanly/chitietsp/<%= row.id %>">
-                                <h4 class="text-purple">
-                                    <%= row.tensp %>
-                                </h4>
-                            </a>
-                        </td>
-                        <td>
-                            <% if (row.id_theloai?.theloai == null) { %>
-                            <p>Đã bị xoá</p>
-                            <% } else { %>
-                            <p><%= row.id_theloai.theloai %></p>
-                            <% } %>
-                        </td>                      
-                        <td><img src=<%=row.image %>
-                            width="200" height="150" alt="Ảnh đại diện"></td>
-                        <td>
-                            <%= row.mota %>
-                        </td>
-                        <td>
-                            <%= row.gia %> VND
-                        </td>
-                        <td>
-                            <a class="btn btn-outline-primary btn-sm" href="quanly/suasp/<%= row.id %>">Sửa</a>
-
-                            <a class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#delete-modal" onclick="setDeleteURL('<%= row.id %>')">Xoá</a>
-
-                            <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog"
-                                aria-labelledby="delete-modal-label" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="delete-modal-label">Xác nhận xoá sản phẩm</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
+        <div class="card mb-4" style="border-radius: 10px;">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="text-center">
+                            <tr>
+                                <th class="col col-2">Tên sản phẩm</th>
+                                <th class="col col-2">Loại sản phẩm</th>
+                                <th class="col col-2">Ảnh sản phẩm</th>
+                                <th class="col col-3">Mô tả</th>
+                                <th class="col col-1">Giá tiền</th>
+                                <th class="col col-2">Tác vụ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% listsp.forEach((row)=> { %>
+                                <tr>
+                                    <td>
+                                        <a href="quanly/chitietsp/<%= row.id %>">
+                                            <h4 class="text-purple">
+                                                <%= row.tensp %>
+                                            </h4>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <% if (row.id_theloai?.theloai==null) { %>
+                                            <p>Đã bị xoá</p>
+                                            <% } else { %>
+                                                <p>
+                                                    <%= row.id_theloai.theloai %>
+                                                </p>
+                                                <% } %>
+                                    </td>
+                                    <td><img src=<%=row.image %> width="200" height="150" alt="Ảnh đại diện"></td>
+                                    <td>
+                                        <%= row.mota %>
+                                    </td>
+                                    <td>
+                                        <%= row.gia %> VND
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-outline-primary btn-sm"
+                                            href="quanly/suasp/<%= row.id %>">Sửa</a>
+                                        <a class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"
+                                            data-bs-target="#delete-modal"
+                                            onclick="setDeleteURL('<%= row.id %>')">Xoá</a>
+                                        <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog"
+                                            aria-labelledby="delete-modal-label" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="delete-modal-label">Xác nhận xoá sản
+                                                            phẩm
+                                                        </h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Bạn có chắc chắn muốn xoá sản phẩm này không?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <a type="button" class="btn btn-danger" id="delete-confirm"
+                                                            href="#">Xoá</a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="modal-body">
-                                            Bạn có chắc chắn muốn xoá sản phẩm này không?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <a type="button" class="btn btn-danger" id="delete-confirm" href="#">Xoá</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <script>
-                                function setDeleteURL(id) {
-                                    var deleteURL = "quanly/xoasp/" + id;
-                                    document.getElementById("delete-confirm").href = deleteURL;
-                                }
-                            </script>
-
-                        </td>
-                    </tr>
-                    <% }); %>
-            </tbody>
-        </table>
+                                        <script>
+                                            function setDeleteURL(id) {
+                                                var deleteURL = "quanly/xoasp/" + id;
+                                                document.getElementById("delete-confirm").href = deleteURL;
+                                            }
+                                        </script>
+                                    </td>
+                                </tr>
+                                <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 
 
