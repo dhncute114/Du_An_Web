@@ -1,32 +1,48 @@
 <%- include('../inc/navQL', {tieu_de: 'Assigment-PH20149' }) %>
 
-    <div class="container">
-        <h1 class="d-flex justify-content-center text-danger-emphasis p-1">
-            <%= sp.tensp %>
-                </h2>
-                <div class="row">
-                    <div class="col-md-4 mb-1 ">
-                        <img src="<%= sp.image %>" width="100%">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="rounded-2 border border-secondary bg-white p-2 mb-2 " style="white-space: nowrap;">
-                            <p style="font-weight: bold; display: inline;">Thể loại:</p>
-                            <%= sp.id_theloai.theloai %>
-                        </div>
-                        <div class="rounded-2 border border-secondary bg-white ps-2 pe-5 pt-5 pb-5 mb-2"
-                            style="white-space: nowrap;"><p style="font-weight: bold; display: inline;">Mô tả:</p>
-                            <%= sp.mota %>
-                        </div>
-                        <div class="rounded-2 border border-secondary bg-white p-2 mb-2" style="white-space: nowrap;">
-                            <p style="font-weight: bold; display: inline;">Số lượng: </p>
-                            <%= sp.soluong %>
-                        </div>
-                        <div class="rounded-2 border border-secondary bg-white p-2 mb-2" style="white-space: nowrap;">
-                            <p style="font-weight: bold; display: inline;">Giá tiền:</p>
-                            <%= sp.gia %> VND
+    <div class="container d-flex justify-content-center mt-4">
+        <div class="row col col-12">
+            <div class="card col col-sm-4 me-3 ms-5" style="border-radius: 10px;">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="align-self-center">
+                            <img src="<%= sp.image %>" class="img-fluid">
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="card col col-sm-7" style="border-radius: 10px;">
+                <div class="card-body">
+                    <h1 class="d-flex justify-content-center p-1">
+                        <%= sp.tensp %>
+                    </h1>
+                        <div class="row d-flex justify-content-center">
+                            <div class="rounded-2 border border-secondary p-2 mb-2 " style="white-space: nowrap;">
+                                <p style="font-weight: bold; display: inline;">Thể loại:</p>
+                                <% if (sp.id_theloai?.theloai==null) { %>
+                                    Đã bị xoá
+                                    <% } else { %>
+                                        <%= sp.id_theloai.theloai %>
+                                            <% } %>
+                            </div>
+                            <div class="rounded-2 border border-secondary  ps-2 pe-5 pt-5 pb-5 mb-2"
+                                style="white-space: nowrap;">
+                                <p style="font-weight: bold; display: inline;">Mô tả:</p>
+                                <%= sp.mota %>
+                            </div>
+                            <div class="rounded-2 border border-secondary p-2 mb-2" style="white-space: nowrap;">
+                                <p style="font-weight: bold; display: inline;">Số lượng: </p>
+                                <%= sp.soluong %>
+                            </div>
+                            <div class="rounded-2 border border-secondary  p-2 mb-2" style="white-space: nowrap;">
+                                <p style="font-weight: bold; display: inline;">Giá tiền:</p>
+                                <%= sp.gia %> VND
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <%- include('../inc/bottom') %>
