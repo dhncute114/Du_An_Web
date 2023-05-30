@@ -1,0 +1,42 @@
+<%- include('../inc/navNV', {tieu_de: 'Du-An' }) %>
+  
+<div class="container mt-4">
+    <h2>Tạo hóa đơn</h2>
+  
+    <form>
+      <div class="form-group">
+        <label for="product">Sản phẩm:</label>
+        <select class="form-control" name="sanpham" data-bs-toggle="dropdown" aria-expanded="false">
+            <% listsp.forEach((row)=> { %>
+                <option value="<%= row._id %>">
+                    <%= row.sanpham %>
+                </option>
+                <% }); %>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label for="quantity">Số lượng:</label>
+        <input type="number" class="form-control" id="quantity">
+      </div>
+  
+      <div class="form-group">
+        <label for="customer">Tên khách hàng:</label>
+        <input type="text" class="form-control" id="customer">
+      </div>
+  
+      <div class="form-group">
+        <label for="address">Địa chỉ:</label>
+        <input type="text" class="form-control" id="address">
+      </div>
+  
+      <div class="form-group">
+        <label for="date">Ngày mua:</label>
+        <input type="date" class="form-control" id="date">
+      </div>
+  
+      <button type="submit" class="btn btn-primary">Tạo hóa đơn</button>
+    </form>
+  </div>
+
+<%- include('../inc/bottom') %>

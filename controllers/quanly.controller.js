@@ -222,13 +222,13 @@ exports.themTheloai = async (req, res, next) => {
             let new_tl = await objsp.save();
             console.log(new_tl);
             msg = 'Đã thêm thành công';
-            res.redirect('/quanly/addtheloai')
+            res.redirect('/quanly')
         } catch (error) {
             msg = 'Lỗi' + error.message;
             console.log(error);
         }
     }
-    res.render('quanly/themtheloai', { listtl: listl });
+    res.render('quanly/themtheloai', { listtl: listl, msg:msg });
 };
 
 exports.xoaTheloai = async (req, res, next) => {
