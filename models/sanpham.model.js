@@ -21,9 +21,9 @@ const hoadonchema = new mongoose.Schema (
         id_soluong: {type: db.mongoose.Schema.Types.ObjectID, ref: 'spmd'},
         tenkh: { type: String, required: true},
         sdtkh: {type: String, required: true},
-        diachikh: {type: Object, required: true},
+        diachikh: {type: String, required: true},
         ngaymua: {type: String, required: true},
-        tongtien: {type: Number, required: true}
+        tongtien: {type: Number, required: false}
     },
     { collection: 'hoa_don' }
 )

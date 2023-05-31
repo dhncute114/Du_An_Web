@@ -21,7 +21,7 @@ exports.themhoadon = async (req, res, next)=>{
 
     let objHD = new mydb.hdmd();
 
-    objHD.tenkh = req.body.tenkh;
+    if (req.body.tenkh) objHD.tenkh = req.body.tenkh;
     objHD.id_tensp = req.body.sanpham;
     objHD.soluong = req.body.soluong;
     objHD.sdtkh = req.body.sdtkh;
@@ -33,6 +33,7 @@ exports.themhoadon = async (req, res, next)=>{
         res.redirect('/nhanvien')
     } catch (error) {
         console.log(error);
+        msg='';
     }
 
     res.render('nhanvien/themhoadon', {listsp: listsp, msg: msg});
