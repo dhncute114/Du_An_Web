@@ -1,42 +1,77 @@
 <%- include('../inc/navNV', {tieu_de: 'Du-An' }) %>
 
-<div class="container mt-4">
-    <h2>Tạo hóa đơn</h2>
+    <div class="container mt-4">
+        <h2 class="d-flex justify-content-center p-2">TẠO HOÁ ĐƠN</h2>
+        <div class="card mb-4" style="border-radius: 10px;">
+            <div class="card-body">
+                <form action="" method="POST">
+                    <%= msg %>
+                        <div class="form-group">
+                            <label for="product">Sản phẩm:</label>
+                            <select class="form-control m-2" name="sanpham" data-bs-toggle="dropdown" aria-expanded="false">
+                                <% listsp.forEach((row)=> { %>
+                                    <option value="<%= row._id %>" data-gia="<%= row.gia %>">
+                                        <%= row.tensp %>
+                                    </option>
 
-    <form action="/nhanvien/themhd" method="POST">
-        <div class="form-group">
-            <label for="product">Sản phẩm:</label>
-            <select class="form-control" name="sanpham" data-bs-toggle="dropdown" aria-expanded="false">
-                <% listsp.forEach((row) => { %>
-                    <option value="<%= row._id %>">
-                        <%= row.tensp %>
-                    </option>
-                <% }); %>
-            </select>
+                                    <% }); %>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="quantity">Số lượng:</label>
+                            <input type="number" class="form-control m-2" name="soluong" id="soluong"
+                                oninput="calculateTotal()">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="customer">Tên khách hàng:</label>
+                            <input type="text" class="form-control m-2" name="tenkh">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="quantity">Số điện thoại khách hàng:</label>
+                            <input type="number" class="form-control m-2" name="sdtkh">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">Địa chỉ:</label>
+                            <textarea type="text" class="form-control m-2" name="diachikh"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="date">Ngày mua:</label>
+                            <input type="text" class="form-control m-2" name="ngaymua">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="product-price">Tổng tiền:</label>
+                            <div class="input-group m-2">
+                                <input type="text" class="form-control " name="tongtien" id="tongtien">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">VNĐ</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-danger m-2">Thêm sản phẩm</button>
+
+                        <script>
+                            function calculateTotal() {
+                                var soluongInput = document.getElementById('soluong');
+                                var soluong = soluongInput.value;
+
+                                var sanphamSelect = document.querySelector('select[name="sanpham"]');
+                                var gia = sanphamSelect.options[sanphamSelect.selectedIndex].getAttribute('data-gia');
+
+                                var tongtien = gia * soluong;
+                                var tongtienInput = document.getElementById('tongtien');
+                                tongtienInput.value = tongtien;
+                            }
+                        </script>
+
+                </form>
+            </div>
         </div>
+    </div>
 
-        <div class="form-group">
-            <label for="quantity">Số lượng:</label>
-            <input type="number" class="form-control" name="quantity">
-        </div>
-
-        <div class="form-group">
-            <label for="customer">Tên khách hàng:</label>
-            <input type="text" class="form-control" name="tenkh">
-        </div>
-
-        <div class="form-group">
-            <label for="address">Địa chỉ:</label>
-            <textarea type="text" class="form-control" name="diachikh"></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="date">Ngày mua:</label>
-            <input type="text" class="form-control" name="ngaymua">
-        </div>
-        <br>
-        <button type="submit" class="btn btn-primary">Tạo hóa đơn</button>
-    </form>
-</div>
-
-<%- include('../inc/bottom') %>
+    <%- include('../inc/bottom') %>

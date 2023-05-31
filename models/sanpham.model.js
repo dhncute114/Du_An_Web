@@ -23,7 +23,7 @@ const hoadonchema = new mongoose.Schema (
         sdtkh: {type: String, required: true},
         diachikh: {type: String, required: true},
         ngaymua: {type: String, required: true},
-        tongtien: {type: Number, required: false}
+        tongtien: {type: String, required: true}
     },
     { collection: 'hoa_don' }
 )

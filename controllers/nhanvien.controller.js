@@ -14,27 +14,48 @@ exports.trangchuNhanvien = async (req, res, next) => {
 
     res.render('nhanvien/trangchuNV', { listsp: listsp, listtl: listl });
 }
-exports.themhoadon = async (req, res, next)=>{
-    let msg = '';
-    var listsp = await mydb.spmd.find();
-    var fs = require('fs');
 
-    let objHD = new mydb.hdmd();
+exports.chitietSp = async (req, res, next) => {
+    let idsp = req.params.idsp;
+    let sp = await mydb.spmd.findById(idsp).populate('id_theloai');
 
-    if (req.body.tenkh) objHD.tenkh = req.body.tenkh;
-    objHD.id_tensp = req.body.sanpham;
-    objHD.soluong = req.body.soluong;
-    objHD.sdtkh = req.body.sdtkh;
-    objHD.diachikh = req.body.diachikh;
-    objHD.ngaymua = req.body.ngaymua;
+    res.render('nhanvien/chitietsp', { sp: sp });
+}
 
-    try {
-        let new_hd = await objHD.save();
-        res.redirect('/nhanvien')
-    } catch (error) {
-        console.log(error);
-        msg='';
+exports.dsHoadon = async (req, res, next) => {
+    let filter = {};
+    if (typeof (req.query.tenkh) !== 'undefined') {
+        filter.tenkh = new RegExp(req.query.tenkh, "i");
     }
 
-    res.render('nhanvien/themhoadon', {listsp: listsp, msg: msg});
+    var listhd = await mydb.hdmd.find(filter).populate('id_tensp');
+
+    res.render('nhanvien/danhsachhd', { listhd: listhd });
+}
+
+exports.themhoadon = async (req, res, next) => {
+    let msg = '';
+    var listsp = await mydb.spmd.find();
+
+    if (req.method == 'POST') {
+        let objHD = new mydb.hdmd();
+
+        objHD.tenkh = req.body.tenkh;
+        objHD.id_tensp = req.body.sanpham;
+        objHD.soluong = req.body.soluong;
+        objHD.sdtkh = req.body.sdtkh;
+        objHD.diachikh = req.body.diachikh;
+        objHD.ngaymua = req.body.ngaymua;
+        objHD.tongtien = req.body.tongtien;
+
+        try {
+            let new_hd = await objHD.save();
+            res.redirect('/nhanvien')
+        } catch (error) {
+            console.log(error);
+            msg = error;
+        }
+    }
+
+    res.render('nhanvien/themhoadon', { listsp: listsp, msg: msg });
 }
