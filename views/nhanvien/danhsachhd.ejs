@@ -5,27 +5,6 @@
 
         <div id="noidung" class="container position-relative">
 
-            <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3" style="border-radius: 10px;">
-                <div class="container-fluid">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item active">
-                                <a class="btn btn-danger" href="/quanly/taotknv">Tạo tài khoản nhân viên</a>
-                            </li>
-                        </ul>
-                        <form class="d-flex" method="GET" action="" id="search-form">
-                            <input class="form-control me-2" type="search" placeholder="Tìm kiếm theo tên khách hàng"
-                                aria-label="Search" name="tenkh">
-                            <button class="btn btn-warning" type="submit">Tìm kiếm</button>
-                        </form>
-                    </div>
-                </div>
-            </nav>
-
             <div class="card" style="border-radius: 10px;">
                 <div class="card-body">
                     <div class="table-responsive">
@@ -45,7 +24,9 @@
                                             <%= row.tenkh %>
                                         </td>
                                         <td>
+                                            <a href="chitietsp/<%= row.id %>">
                                             <%= row.id_tensp.tensp %>
+                                            </a>
                                         </td>
                                         <td>
                                             <%= row.tongtien %>
@@ -68,7 +49,7 @@
                                                                 data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            Bạn có chắc chắn muốn xoá sản phẩm này không?
+                                                            Bạn có chắc chắn muốn xoá hóa đơn này không?
                                                         </div>
                                                         <div class="modal-footer">
                                                             <a type="button" class="btn btn-danger" id="delete-confirm"
