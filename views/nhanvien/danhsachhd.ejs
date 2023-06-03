@@ -24,7 +24,7 @@
                                             <%= row.tenkh %>
                                         </td>
                                         <td>
-                                            <a href="chitietsp/<%= row.id %>">
+                                            <a href="chitiethd/<%= row.id %>">
                                             <%= row.id_tensp.tensp %>
                                             </a>
                                         </td>
@@ -43,7 +43,7 @@
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title" id="delete-modal-label">Xác nhận xoá
-                                                                sản phẩm
+                                                                Hoá đơn
                                                             </h5>
                                                             <button type="button" class="btn-close"
                                                                 data-bs-dismiss="modal" aria-label="Close"></button>
@@ -61,7 +61,7 @@
 
                                             <script>
                                                 function setDeleteURL(id) {
-                                                    var deleteURL = "/quanly/taikhoan/xoatk/" + id;
+                                                    var deleteURL = "/nhanvien/dshoadon/xoahd/" + id;
                                                     document.getElementById("delete-confirm").href = deleteURL;
                                                 }
                                             </script>

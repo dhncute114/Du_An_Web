@@ -50,7 +50,7 @@ exports.themhoadon = async (req, res, next) => {
 
         try {
             let new_hd = await objHD.save();
-            res.redirect('/nhanvien')
+            res.redirect('/nhanvien/dshoadon')
         } catch (error) {
             console.log(error);
             msg = error;
@@ -58,4 +58,23 @@ exports.themhoadon = async (req, res, next) => {
     }
 
     res.render('nhanvien/themhoadon', { listsp: listsp, msg: msg });
+}
+
+exports.chitiethd = async (req, res, next) => {
+    let idhd = req.params.idhd;
+    let hd = await mydb.hdmd.findById(idhd).populate('id_tensp');
+
+    res.render('nhanvien/chitiethd', { hd: hd });
+}
+
+exports.xoaHoadon = async (req, res, next) => {
+    let id = req.params.idhd;
+
+    try {
+        await mydb.hdmd.findByIdAndDelete(id);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal server error');
+    }
+    res.redirect('/nhanvien/dshoadon')
 }

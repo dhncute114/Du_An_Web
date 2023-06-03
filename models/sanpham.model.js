@@ -19,6 +19,7 @@ const hoadonchema = new mongoose.Schema (
         id_image: {type: db.mongoose.Schema.Types.ObjectID, ref: 'spmd'},
         id_gia: {type: db.mongoose.Schema.Types.ObjectID, ref: 'spmd'},
         id_soluong: {type: db.mongoose.Schema.Types.ObjectID, ref: 'spmd'},
+        soluong: { type: String, required: true},
         tenkh: { type: String, required: true},
         sdtkh: {type: String, required: true},
         diachikh: {type: String, required: true},

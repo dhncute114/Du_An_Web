@@ -4,6 +4,14 @@ var quanlyRoute = require('../controllers/quanly.controller');
 var multer = require('multer');
 var uploader = multer({dest: './tmp'});
 
+router.use((req, res, next) => {
+    if (req.session.userlogin) {
+        next();
+    } else {
+        res.redirect('/');
+    }
+});
+
 router.get('/', quanlyRoute.trangchuQuanly);
 
 router.get('/chitietsp/:idsp', quanlyRoute.chitietSp);
@@ -34,8 +42,13 @@ router.post('/addtheloai', quanlyRoute.themTheloai);
 router.post('/addtheloai/xoatheloai', quanlyRoute.xoaTheloai);
 
 
+router.get('/logout', (req, res) => {
 
-
+    req.session.destroy();
+  
+    // Chuyển hướng đến trang đăng nhập sau khi đăng xuất
+    res.redirect('/');
+  });
 
 
 module.exports = router;
