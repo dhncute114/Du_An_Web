@@ -1,0 +1,79 @@
+<%- include('../inc/navQL')%>
+
+    <div class="container">
+        <h2 class="d-flex justify-content-center p-2 mb-5">DANH SÁCH HOÁ ĐƠN</h2>
+
+        <div id="noidung" class="container position-relative">
+
+            <div class="card" style="border-radius: 10px;">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Tên khách hàng</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Tác vụ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% listhd.forEach((row)=> { %>
+                                    <tr>
+                                        <td>
+                                            <%= row.tenkh %>
+                                        </td>
+                                        <td>
+                                            <a href="chitiethd/<%= row.id %>">
+                                            <%= row.id_tensp.tensp %>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <%= row.tongtien %>
+                                        </td>
+                                        <td>
+
+                                            <a class="btn btn-outline-danger" data-bs-toggle="modal"
+                                                data-bs-target="#delete-modal"
+                                                onclick="setDeleteURL('<%= row.id %>')">Xoá</a>
+
+                                            <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog"
+                                                aria-labelledby="delete-modal-label" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="delete-modal-label">Xác nhận xoá
+                                                                Hoá đơn
+                                                            </h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Bạn có chắc chắn muốn xoá hóa đơn này không?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <a type="button" class="btn btn-danger" id="delete-confirm"
+                                                                href="#">Xoá</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <script>
+                                                function setDeleteURL(id) {
+                                                    var deleteURL = "/quanly/dshoadon/xoahd/" + id;
+                                                    document.getElementById("delete-confirm").href = deleteURL;
+                                                }
+                                            </script>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <%- include('../inc/bottom') %>

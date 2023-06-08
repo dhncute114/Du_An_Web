@@ -1,77 +1,154 @@
 <%- include('../inc/navNV', {tieu_de: 'Du-An' }) %>
 
-    <div class="container mt-4">
-        <h2 class="d-flex justify-content-center p-2">TẠO HOÁ ĐƠN</h2>
-        <div class="card mb-4" style="border-radius: 10px;">
-            <div class="card-body">
-                <form action="" method="POST">
-                    <%= msg %>
-                        <div class="form-group">
-                            <label for="product">Sản phẩm:</label>
-                            <select class="form-control m-2" name="sanpham" data-bs-toggle="dropdown" aria-expanded="false">
-                                <% listsp.forEach((row)=> { %>
-                                    <option value="<%= row._id %>" data-gia="<%= row.gia %>">
-                                        <%= row.tensp %>
-                                    </option>
-
-                                    <% }); %>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="quantity">Số lượng:</label>
-                            <input type="number" class="form-control m-2" name="soluong" id="soluong"
-                                oninput="calculateTotal()">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="customer">Tên khách hàng:</label>
-                            <input type="text" class="form-control m-2" name="tenkh">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="quantity">Số điện thoại khách hàng:</label>
-                            <input type="number" class="form-control m-2" name="sdtkh">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="address">Địa chỉ:</label>
-                            <textarea type="text" class="form-control m-2" name="diachikh"></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="date">Ngày mua:</label>
-                            <input type="date" class="form-control m-2" name="ngaymua">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="product-price">Tổng tiền:</label>
-                            <div class="input-group m-2">
-                                <input type="text" class="form-control " name="tongtien" id="tongtien">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">VNĐ</span>
-                                </div>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-danger m-2">Thêm Hóa Đơn</button>
-
-                        <script>
-                            function calculateTotal() {
-                                var soluongInput = document.getElementById('soluong');
-                                var soluong = soluongInput.value;
-
-                                var sanphamSelect = document.querySelector('select[name="sanpham"]');
-                                var gia = sanphamSelect.options[sanphamSelect.selectedIndex].getAttribute('data-gia');
-
-                                var tongtien = gia * soluong;
-                                var tongtienInput = document.getElementById('tongtien');
-                                tongtienInput.value = tongtien;
-                            }
-                        </script>
-
-                </form>
-            </div>
+<div class="container mt-4">
+  <h2 class="d-flex justify-content-center p-2">TẠO HOÁ ĐƠN</h2>
+  <div class="card mb-4" style="border-radius: 10px">
+    <div class="card-body">
+      <form action="" method="POST">
+        <%= msg %>
+        <div class="form-group">
+          <label for="product">Sản phẩm:</label>
+          <select
+            class="form-control m-2"
+            name="sanpham"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <% listsp.forEach((row) => { %> <% if (row.soluong > 0) { %>
+            <option
+              value="<%= row._id %>"
+              data-gia="<%= row.gia %>"
+              data-remaining-quantity="<%= row.soluong %>"
+            >
+              <%= row.tensp %>
+            </option>
+            <% } else { %>
+            <option value="<%= row._id %>" data-gia="<%= row.gia %>" disabled>
+              <%= row.tensp %> - Hết hàng
+            </option>
+            <% } %> <% }); %>
+          </select>
         </div>
-    </div>
 
-    <%- include('../inc/bottom') %>
+        <div class="form-group">
+          <label for="quantity">Số lượng:</label>
+          <input
+            type="text"
+            class="form-control m-2"
+            name="soluong"
+            id="soluong"
+            oninput="calculateTotal()"
+          />
+          <span id="error-msg" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="customer">Tên khách hàng:</label>
+          <input type="text" class="form-control m-2" name="tenkh" />
+        </div>
+
+        <div class="form-group">
+          <label for="quantity">Số điện thoại khách hàng:</label>
+          <input type="number" class="form-control m-2" name="sdtkh" />
+        </div>
+
+        <div class="form-group">
+          <label for="address">Địa chỉ:</label>
+          <textarea
+            type="text"
+            class="form-control m-2"
+            name="diachikh"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="date">Ngày mua:</label>
+          <input type="date" class="form-control m-2" name="ngaymua" />
+        </div>
+
+        <div class="form-group">
+          <label for="product-price">Tổng tiền:</label>
+          <div class="input-group m-2">
+            <input
+              type="text"
+              class="form-control"
+              name="tongtien"
+              id="tongtien"
+            />
+            <div class="input-group-append">
+              <span class="input-group-text">VNĐ</span>
+            </div>
+          </div>
+        </div>
+        <button id="submit-btn" type="submit" class="btn btn-danger m-2">
+          Thêm Hóa Đơn
+        </button>
+
+        <script>
+          function calculateTotal() {
+            var soluongInput = document.getElementById("soluong");
+            var soluong = parseInt(soluongInput.value); // Chuyển đổi sang kiểu số nguyên
+
+            var sanphamSelect = document.querySelector(
+              'select[name="sanpham"]'
+            );
+            var gia = parseInt(
+              sanphamSelect.options[sanphamSelect.selectedIndex].getAttribute(
+                "data-gia"
+              )
+            );
+
+            var tongtien = gia * soluong;
+            var tongtienInput = document.getElementById("tongtien");
+            tongtienInput.value = tongtien;
+
+            var selectedOption =
+              sanphamSelect.options[sanphamSelect.selectedIndex];
+            var remainingQuantity = parseInt(
+              selectedOption.getAttribute("data-remaining-quantity")
+            );
+
+            var errorMsg = document.getElementById("error-msg");
+            if (soluong > remainingQuantity) {
+              errorMsg.textContent = "Số lượng vượt quá số lượng còn lại.";
+              document.getElementById("submit-btn").disabled = true;
+            } else {
+              errorMsg.textContent = "";
+              document.getElementById("submit-btn").disabled = false;
+            }
+          }
+
+          // Lắng nghe sự kiện submit để kiểm tra số lượng
+          document
+            .querySelector("form")
+            .addEventListener("submit", function (event) {
+              var soluongInput = document.getElementById("soluong");
+              var soluong = parseInt(soluongInput.value); // Chuyển đổi sang kiểu số nguyên
+
+              var sanphamSelect = document.querySelector(
+                'select[name="sanpham"]'
+              );
+              var selectedOption =
+                sanphamSelect.options[sanphamSelect.selectedIndex];
+              var remainingQuantity = parseInt(
+                selectedOption.getAttribute("data-remaining-quantity")
+              );
+
+              if (soluong > remainingQuantity) {
+                event.preventDefault(); // Ngăn chặn việc submit form
+                var errorMsg = document.getElementById("error-msg");
+                errorMsg.textContent = "Số lượng vượt quá số lượng sản sản phẩm còn lại";
+                document.getElementById("submit-btn").disabled = true;
+              } else {
+                var errorMsg = document.getElementById("error-msg");
+                errorMsg.textContent = "";
+                document.getElementById("submit-btn").disabled = false;
+              }
+            });
+        </script>
+      </form>
+    </div>
+  </div>
+</div>
+
+<%- include('../inc/bottom') %>

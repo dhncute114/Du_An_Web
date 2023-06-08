@@ -21,9 +21,6 @@ router.post('/themhd',nhanvienRoute.themhoadon);
 router.get('/dshoadon',nhanvienRoute.dsHoadon);
 router.post('/dshoadon',nhanvienRoute.dsHoadon);
 
-router.delete('/dshoadon/xoahd/:idhd', nhanvienRoute.xoaHoadon);
-router.get('/dshoadon/xoahd/:idhd', nhanvienRoute.xoaHoadon);
-
 router.get('/logout', (req, res) => {
 
     req.session.destroy();

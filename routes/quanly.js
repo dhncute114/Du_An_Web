@@ -41,6 +41,12 @@ router.get('/addtheloai', quanlyRoute.themTheloai);
 router.post('/addtheloai', quanlyRoute.themTheloai);
 router.post('/addtheloai/xoatheloai', quanlyRoute.xoaTheloai);
 
+router.get('/dshoadon',quanlyRoute.dsHoadon);
+router.post('/dshoadon',quanlyRoute.dsHoadon);
+
+router.delete('/dshoadon/xoahd/:idhd', quanlyRoute.xoaHoadon);
+router.get('/dshoadon/xoahd/:idhd', quanlyRoute.xoaHoadon);
+router.get('/chitiethd/:idhd', quanlyRoute.chitiethd);
 
 router.get('/logout', (req, res) => {
 
