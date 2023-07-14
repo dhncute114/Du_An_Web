@@ -7,6 +7,7 @@ var logger = require('morgan');
 var taikhoanRouter = require('./routes/taikhoan');
 var quanlyRouter = require('./routes/quanly');
 var nhanvienRouter = require('./routes/nhanvien');
+var apiRouter = require('./routes/API');
 var bodyParser = require('body-parser')
 var session = require('express-session')
 
@@ -32,6 +33,7 @@ app.use(bodyParser.json());
 app.use('/', taikhoanRouter);
 app.use('/nhanvien', nhanvienRouter);
 app.use('/quanly', quanlyRouter);
+app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
