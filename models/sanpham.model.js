@@ -16,7 +16,6 @@ const spchema = new db.mongoose.Schema(
 const hoadonchema = new mongoose.Schema (
     {
         id_tensp: {type: db.mongoose.Schema.Types.ObjectID, ref: 'spmd'},
-        id_image: {type: db.mongoose.Schema.Types.ObjectID, ref: 'spmd'},
         id_gia: {type: db.mongoose.Schema.Types.ObjectID, ref: 'spmd'},
         id_soluong: {type: db.mongoose.Schema.Types.ObjectID, ref: 'spmd'},
         soluong: { type: String, required: true},
